@@ -24,7 +24,7 @@ currently no Linux/Windows/Intel-Mac path for the transcription stage — everyt
 ## Quick start
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/Kaewkloaw/Meeting-Summarizer-Local.git
 cd local-meeting-web
 ./start_local_web.sh
 ```
