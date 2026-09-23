@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thai Meeting Summary</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="container">
+    <center>
+      <h1>Thai Meeting Summary ✨</h1>
+    </center>
+    <section class="input-tabs">
+      <div class="tab-buttons">
+        <button type="button" id="tab-file-btn" class="tab-btn active">อัปโหลดไฟล์</button>
+        <button type="button" id="tab-yt-btn" class="tab-btn">ลิงก์ YouTube</button>
+      </div>
+
+      <form id="file-form" class="tab-panel">
+        <label for="file-input">เลือกไฟล์ (MP3, M4A, WAV, MP4, MOV)</label>
+        <input type="file" id="file-input" name="file" accept=".mp3,.m4a,.wav,.mp4,.mov" required />
+        <button type="submit">เริ่มถอดเสียง</button>
+      </form>
+
+      <form id="yt-form" class="tab-panel hidden">
+        <label for="yt-input">วางลิงก์ YouTube</label>
+        <input type="url" id="yt-input" name="url" placeholder="https://www.youtube.com/watch?v=..." required />
+        <button type="submit">เริ่มถอดเสียง</button>
+      </form>
+      <p>ถอดเสียงด้วย mlx-whisper
+      ({{ whisper_model }}) และสรุปด้วย Local LLM ผ่าน Ollama ({{ ollama_model }})</p>
+    </section>
+
+    <section id="status-box" class="status-box hidden">
+      <div class="status-line">
+        <span id="status-spinner" class="spinner"></span>
+        <span id="status-text">รอเริ่มดำเนินการ</span>
+        <span id="status-percent" class="status-percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="status-steps">
+        <span data-step="downloading">ดาวน์โหลด</span>
+        <span data-step="transcribing">ถอดเสียง</span>
+        <span data-step="summarizing">สรุป</span>
+        <span data-step="completed">เสร็จแล้ว</span>
+      </div>
+    </section>
+
+    <section id="review-box" class="review-box hidden">
+      <h2>ถอดเสียงเสร็จแล้ว</h2>
+      <p>กรุณาดาวน์โหลดและตรวจสอบความถูกต้องของ Transcript ก่อนสร้าง Meeting Summary</p>
+      <div class="downloads" id="review-downloads"></div>
+      <button type="button" id="summarize-btn" class="primary-btn">สรุปการประชุม</button>
+    </section>
+
+    <section id="result-box" class="result-box hidden">
+      <h2>ผลลัพธ์</h2>
+      <p>ผลสรุปนี้สร้างโดย Local LLM โดยอัตโนมัติ กรุณาตรวจทานความถูกต้องก่อนนำไปใช้งานจริง</p>
+      <div class="downloads" id="downloads"></div>
+    </section>
+
+    <section id="error-box" class="error-box hidden"></section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
